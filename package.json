@@ -1,17 +1,11 @@
 {
   "name": "intlized-components",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "./lib/index.js",
   "description": "React.js Redux components for internationalization (i18n)",
   "author": "Markus Wetzel <markuswetzel@gmx.net>",
   "license": "MIT",
-  "keywords": [
-    "react",
-    "redux",
-    "i18n",
-    "intl",
-    "internationalization"
-  ],
+  "keywords": ["react", "redux", "i18n", "intl", "internationalization"],
   "repository": "https://github.com/ProAI/intlized-components.git",
   "bugs": {
     "url": "https://github.com/ProAI/intlized-components/issues"
