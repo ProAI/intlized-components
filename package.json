@@ -5,7 +5,13 @@
   "description": "React.js Redux components for internationalization (i18n)",
   "author": "Markus Wetzel <markuswetzel@gmx.net>",
   "license": "MIT",
-  "keywords": ["react", "redux", "i18n", "intl", "internationalization"],
+  "keywords": [
+    "react",
+    "redux",
+    "i18n",
+    "intl",
+    "internationalization"
+  ],
   "repository": "https://github.com/ProAI/intlized-components.git",
   "bugs": {
     "url": "https://github.com/ProAI/intlized-components/issues"
@@ -16,6 +22,8 @@
     "lint": "./node_modules/.bin/eslint src"
   },
   "dependencies": {
+    "intl": "^1.2.5",
+    "intl-locales-supported": "^1.0.0",
     "intl-messageformat": "^2.1.0",
     "intl-relativeformat": "^2.0.0",
     "prop-types": "^15.5.10"

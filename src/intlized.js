@@ -4,32 +4,43 @@ import IntlMessageFormat from 'intl-messageformat';
 import { getRawMessage, getRealProps } from './utils';
 
 const defaultConfig = {
-  scope: '',
+  scope: null,
   html: false,
-  intlizedProps: { children: '' },
+  intlizedProps: { children: 'name' },
 };
 
 export default function intlized(Component, customConfig) {
   // create config object
-  const config = Object.assign({}, customConfig, defaultConfig);
+  const config = Object.assign({}, defaultConfig, customConfig);
 
   // split scope
-  config.scope = config.scope.split('.');
+  config.scope = config.scope ? config.scope.split('.') : [];
 
   const mapStateToProps = (state, { variables, ...props }) => {
     const locale = state.intl.locale;
 
-    return Object.keys(config.intlizedProps).map((propName) => {
-      const key = config.intlizedProps[propName];
-      const rawMessage = getRawMessage(props[key], config.scope, state.intl.messages);
+    const stateProps = {};
 
-      return new IntlMessageFormat(rawMessage, locale).format(variables);
+    Object.keys(config.intlizedProps).forEach((propName) => {
+      const key = config.intlizedProps[propName];
+      const rawMessage = getRawMessage(props[key].split('.'), config.scope, state.intl.messages);
+
+      if (!rawMessage) {
+        // eslint-disable-next-line no-console
+        console.error(`Translation for key "${props[key]}" not found.`);
+        stateProps[propName] = props[key];
+      } else {
+        stateProps[propName] = new IntlMessageFormat(rawMessage, locale).format(variables);
+      }
     });
+
+    return stateProps;
   };
 
-  function FormattedComponent({ ...props }) {
+  function FormattedComponent(props) {
+    // console.log(getRealProps(props, config.intlizedProps));
     return <Component {...getRealProps(props, config.intlizedProps)} />;
   }
 
-  return connect(mapStateToProps)(FormattedComponent);
+  return connect(mapStateToProps, {})(FormattedComponent);
 }

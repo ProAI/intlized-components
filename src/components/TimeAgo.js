@@ -7,7 +7,7 @@ const propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  value: new IntlRelativeFormat(props.locale, props.options).format(props.value),
+  value: new IntlRelativeFormat(state.intl.currentLocale, props.options).format(props.value),
 });
 
 function TimeAgo({ value }) {

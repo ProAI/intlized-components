@@ -6,7 +6,7 @@ const propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  value: new Intl.NumberFormat(props.locale, props.options).format(props.value),
+  value: new Intl.NumberFormat(state.intl.currentLocale, props.options).format(props.value),
 });
 
 function Number({ value }) {

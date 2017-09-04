@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -6,11 +7,11 @@ const propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  value: new Intl.DateTimeFormat(props.locale, props.options).format(props.value),
+  value: new Intl.DateTimeFormat(state.intl.currentLocale, props.options).format(props.value),
 });
 
 function DateTime({ value }) {
-  return value;
+  return <span>{value}</span>;
 }
 
 DateTime.propTypes = propTypes;

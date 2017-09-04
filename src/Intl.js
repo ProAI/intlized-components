@@ -5,6 +5,7 @@ export default class Intl {
     this.currentLocale = config.currentLocale || 'en';
     this.defaultLocale = config.defaultLocale || 'en';
     this.locales = config.locales || ['en'];
+    this.messages = config.messages;
   }
 
   reducer() {

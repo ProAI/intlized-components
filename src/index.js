@@ -1,24 +1,13 @@
 // import de locale data
-import 'intl-messageformat/dist/locale-data/de';
-import 'intl-relativeformat/dist/locale-data/de';
+import './locales/de';
 
 // import intlized components/utils
 import Intl from './Intl';
 import intlized from './intlized';
-import actions from './actions';
+import * as actions from './actions';
 import T from './components/T';
-import FormattedDate from './components/FormattedDate';
-import FormattedTime from './components/FormattedTime';
-import FormattedRelative from './components/FormattedRelative';
-import FormattedNumber from './components/FormattedNumber';
+import DateTime from './components/DateTime';
+import TimeAgo from './components/TimeAgo';
+import Number from './components/Number';
 
-export {
-  Intl,
-  intlized,
-  actions,
-  T,
-  FormattedDate,
-  FormattedTime,
-  FormattedRelative,
-  FormattedNumber,
-};
+export { Intl, intlized, actions, T, DateTime, TimeAgo, Number };
