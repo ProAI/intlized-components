@@ -1,6 +1,6 @@
 import areIntlLocalesSupported from 'intl-locales-supported';
 
-export default function polyfill(availableLocales) {
+export default function polyfillIntl(availableLocales) {
   if (global.Intl) {
     // Determine if the built-in `Intl` has the locale data we need.
     if (!areIntlLocalesSupported(availableLocales)) {

@@ -6,7 +6,7 @@ import { getRawMessage, getRealProps } from './utils';
 const defaultConfig = {
   scope: null,
   html: false,
-  intlizedProps: { children: 'name' },
+  intlizedProps: { children: 'transKey' },
 };
 
 export default function intlized(Component, customConfig) {
@@ -23,14 +23,16 @@ export default function intlized(Component, customConfig) {
 
     Object.keys(config.intlizedProps).forEach((propName) => {
       const key = config.intlizedProps[propName];
-      const rawMessage = getRawMessage(props[key].split('.'), config.scope, state.intl.messages);
+      const keys = props[key] ? props[key].split('.') : [];
+      const rawMessage = getRawMessage(keys, config.scope, state.intl.messages);
 
-      if (!rawMessage) {
-        // eslint-disable-next-line no-console
-        console.error(`Translation for key "${props[key]}" not found.`);
-        stateProps[propName] = props[key];
-      } else {
+      if (rawMessage && (typeof rawMessage === 'string' || rawMessage instanceof String)) {
         stateProps[propName] = new IntlMessageFormat(rawMessage, locale).format(variables);
+      } else {
+        const scope = config.scope ? config.scope.join('.') : '';
+        // eslint-disable-next-line no-console
+        console.error(`Translation for scope "${scope}" and key "${props[key]}" not found.`);
+        stateProps[propName] = props[key];
       }
     });
 

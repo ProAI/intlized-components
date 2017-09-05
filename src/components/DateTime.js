@@ -7,7 +7,7 @@ const propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  value: new Intl.DateTimeFormat(state.intl.currentLocale, props.options).format(props.value),
+  value: new Intl.DateTimeFormat(state.intl.locale, props.options).format(new Date(props.value)),
 });
 
 function DateTime({ value }) {

@@ -1,25 +1,25 @@
-export default function getRawMessage(key, scope, messages) {
+export default function getRawMessage(keys, scopes, messages) {
   let message = messages;
   let error = false;
 
-  scope.forEach((scopePart) => {
-    if (!message[scopePart]) {
+  scopes.forEach((scope) => {
+    if (!message[scope]) {
       error = true;
       return;
     }
 
-    message = message[scopePart];
+    message = message[scope];
   });
 
   if (error) return null;
 
-  key.forEach((keyPart) => {
-    if (!message[keyPart]) {
+  keys.forEach((key) => {
+    if (!message[key]) {
       error = true;
       return;
     }
 
-    message = message[keyPart];
+    message = message[key];
   });
 
   if (error) return null;

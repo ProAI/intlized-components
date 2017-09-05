@@ -1,13 +1,13 @@
 export default function createReducer(
-  currentLocale = 'en',
+  locale = 'en',
   defaultLocale = 'en',
-  locales = ['en', 'de'],
+  supportedLocales = ['en', 'de'],
   messages = {},
 ) {
   const initialState = {
-    currentLocale,
+    locale,
     defaultLocale,
-    locales,
+    supportedLocales,
     messages,
   };
 
@@ -16,7 +16,7 @@ export default function createReducer(
       case 'INTLIZED_CHANGE_LOCALE': {
         return {
           ...state,
-          currentLocale: action.locale,
+          locale: action.locale,
           messages: action.messages,
         };
       }
