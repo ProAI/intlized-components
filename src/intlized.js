@@ -6,7 +6,7 @@ import { getRawMessage, getRealProps } from './utils';
 const defaultConfig = {
   scope: null,
   html: false,
-  intlizedProps: { children: 'transKey' },
+  mappings: { children: 'transKey' },
 };
 
 export default function intlized(Component, customConfig) {
@@ -21,8 +21,8 @@ export default function intlized(Component, customConfig) {
 
     const stateProps = {};
 
-    Object.keys(config.intlizedProps).forEach((propName) => {
-      const key = config.intlizedProps[propName];
+    Object.keys(config.mappings).forEach((propName) => {
+      const key = config.mappings[propName];
       const keys = props[key] ? props[key].split('.') : [];
       const rawMessage = getRawMessage(keys, config.scope, state.intl.messages);
 
@@ -40,8 +40,8 @@ export default function intlized(Component, customConfig) {
   };
 
   function FormattedComponent(props) {
-    // console.log(getRealProps(props, config.intlizedProps));
-    return <Component {...getRealProps(props, config.intlizedProps)} />;
+    // console.log(getRealProps(props, config.mappings));
+    return <Component {...getRealProps(props, config.mappings)} />;
   }
 
   return connect(mapStateToProps, {})(FormattedComponent);
