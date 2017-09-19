@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import IntlMessageFormat from 'intl-messageformat';
-import { getRawMessage, getRealProps } from './utils';
+import { getRawMessage, getRealProps, getTranslationKeys, getDefaultMessage } from './utils';
 
 const defaultConfig = {
   scope: null,
@@ -23,8 +23,12 @@ export default function intlized(Component, customConfig) {
 
     Object.keys(config.mappings).forEach((propName) => {
       const key = config.mappings[propName];
-      const keys = props[key] ? props[key].split('.') : [];
-      const rawMessage = getRawMessage(keys, config.scope, state.intl.messages);
+
+      const rawMessage = getRawMessage(
+        getTranslationKeys(props[key]),
+        config.scope,
+        state.intl.messages,
+      );
 
       if (rawMessage && (typeof rawMessage === 'string' || rawMessage instanceof String)) {
         stateProps[propName] = new IntlMessageFormat(rawMessage, locale).format(variables);
@@ -32,7 +36,8 @@ export default function intlized(Component, customConfig) {
         const scope = config.scope ? config.scope.join('.') : '';
         // eslint-disable-next-line no-console
         console.error(`Translation for scope "${scope}" and key "${props[key]}" not found.`);
-        stateProps[propName] = props[key];
+
+        stateProps[propName] = getDefaultMessage(props[key]) || props[key];
       }
     });
 

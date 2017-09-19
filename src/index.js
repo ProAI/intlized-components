@@ -6,4 +6,6 @@ import DateTime from './components/DateTime';
 import TimeAgo from './components/TimeAgo';
 import Number from './components/Number';
 
-export { IntlClient, intlized, actions, T, DateTime, TimeAgo, Number };
+export default intlized;
+
+export { IntlClient, actions, T, DateTime, TimeAgo, Number };
