@@ -34,10 +34,24 @@ export default function intlized(Component, customConfig) {
         stateProps[propName] = new IntlMessageFormat(rawMessage, locale).format(variables);
       } else {
         const scope = config.scope ? config.scope.join('.') : '';
-        // eslint-disable-next-line no-console
-        console.error(`Translation for scope "${scope}" and key "${props[key]}" not found.`);
 
-        stateProps[propName] = getDefaultMessage(props[key]) || props[key];
+        const defaultMessage = getDefaultMessage(props[key]);
+
+        if (defaultMessage) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            `Translation for scope "${scope}" and key "${props[key].key ||
+              props[key]}" not found. Fallback to default message.`,
+          );
+        } else {
+          // eslint-disable-next-line no-console
+          console.warn(
+            `Translation for scope "${scope}" and key "${props[key].key ||
+              props[key]}" not found. No default message found.`,
+          );
+        }
+
+        stateProps[propName] = defaultMessage || props[key];
       }
     });
 
