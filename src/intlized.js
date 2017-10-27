@@ -1,67 +1,56 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import IntlMessageFormat from 'intl-messageformat';
-import { getRawMessage, getRealProps, getTranslationKeys, getDefaultMessage } from './utils';
+import { getRawMessage, isString } from './utils';
 
 const defaultConfig = {
   scope: null,
   html: false,
-  mappings: { children: 'transKey' },
+  strict: true,
 };
 
-export default function intlized(Component, customConfig) {
-  // create config object
-  const config = Object.assign({}, defaultConfig, customConfig);
+export default function intlized(intlizedPropNames, customConfig) {
+  return (Component) => {
+    // create config object
+    const config = Object.assign({}, defaultConfig, customConfig);
 
-  // split scope
-  config.scope = config.scope ? config.scope.split('.') : [];
+    const mapStateToProps = (state, { ...props }) => {
+      const { locale } = state.intl;
 
-  const mapStateToProps = (state, { variables, ...props }) => {
-    const locale = state.intl.locale;
+      const nextProps = {};
 
-    const stateProps = {};
+      intlizedPropNames.forEach((propName) => {
+        const prop = props[propName];
 
-    Object.keys(config.mappings).forEach((propName) => {
-      const key = config.mappings[propName];
-
-      const rawMessage = getRawMessage(
-        getTranslationKeys(props[key]),
-        config.scope,
-        state.intl.messages,
-      );
-
-      if (rawMessage && (typeof rawMessage === 'string' || rawMessage instanceof String)) {
-        stateProps[propName] = new IntlMessageFormat(rawMessage, locale).format(variables);
-      } else {
-        const scope = config.scope ? config.scope.join('.') : '';
-
-        const defaultMessage = getDefaultMessage(props[key]);
-
-        if (defaultMessage) {
-          // eslint-disable-next-line no-console
-          console.warn(
-            `Translation for scope "${scope}" and key "${props[key].key ||
-              props[key]}" not found. Fallback to default message.`,
-          );
-        } else {
-          // eslint-disable-next-line no-console
-          console.warn(
-            `Translation for scope "${scope}" and key "${props[key].key ||
-              props[key]}" not found. No default message found.`,
-          );
+        // strict mode is disabled, so prop can be a non-intlized string, too.
+        if (!config.strict && isString(prop)) {
+          nextProps[propName] = prop;
+          return;
         }
 
-        stateProps[propName] = defaultMessage || props[key];
-      }
-    });
+        // get message
+        const rawMessage = getRawMessage(prop.key, config.scope, state.intl.messages);
 
-    return stateProps;
+        // message not found, use default message or message key
+        if (!rawMessage) {
+          if (prop.default) {
+            // eslint-disable-next-line no-console
+            console.warn(`Translation for scope "${config.scope}" and key "${prop.key}" not found. Fallback to default message.`);
+          } else {
+            // eslint-disable-next-line no-console
+            console.warn(`Translation for scope "${config.scope}" and key "${prop.key}" not found. No default message found.`);
+          }
+
+          nextProps[propName] = prop.default || prop.key;
+          return;
+        }
+
+        // message found, set prop to message value
+        nextProps[propName] = new IntlMessageFormat(rawMessage, locale).format(prop.variables);
+      });
+
+      return nextProps;
+    };
+
+    return connect(mapStateToProps)(Component);
   };
-
-  function FormattedComponent(props) {
-    // console.log(getRealProps(props, config.mappings));
-    return <Component {...getRealProps(props, config.mappings)} />;
-  }
-
-  return connect(mapStateToProps, {})(FormattedComponent);
 }

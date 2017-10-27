@@ -1,17 +1,10 @@
-export default function getRawMessage(keys, scopes, messages) {
+import isString from './isString';
+
+export default function getRawMessage(rawKey, rawScope, messages) {
+  const keys = [rawScope, rawKey].join('.').split('.');
+
   let message = messages;
   let error = false;
-
-  scopes.forEach((scope) => {
-    if (!message[scope]) {
-      error = true;
-      return;
-    }
-
-    message = message[scope];
-  });
-
-  if (error) return null;
 
   keys.forEach((key) => {
     if (!message[key]) {
@@ -22,7 +15,8 @@ export default function getRawMessage(keys, scopes, messages) {
     message = message[key];
   });
 
-  if (error) return null;
+  // error found or result is not a string, return null
+  if (error || !isString(message)) return null;
 
   return message;
 }
