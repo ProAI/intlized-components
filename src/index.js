@@ -1,11 +1,9 @@
 import IntlClient from './IntlClient';
-import intlized from './intlized';
 import * as actions from './actions';
+import Intlized from './components/Intlized';
 import Trans from './components/Trans';
 import DateTime from './components/DateTime';
 import TimeAgo from './components/TimeAgo';
 import Number from './components/Number';
 
-export default intlized;
-
-export { IntlClient, actions, Trans, DateTime, TimeAgo, Number };
+export { IntlClient, actions, Intlized, Trans, DateTime, TimeAgo, Number };

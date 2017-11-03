@@ -1,7 +1,7 @@
 import isString from './isString';
 
 export default function getRawMessage(rawKey, rawScope, messages) {
-  const keys = [rawScope, rawKey].join('.').split('.');
+  const keys = (rawScope ? [rawScope, rawKey].join('.') : rawKey).split('.');
 
   let message = messages;
   let error = false;

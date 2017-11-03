@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import injectIntl from './injectIntl';
+import intlProp from './intlProp';
 
 const propTypes = {
   value: PropTypes.string.isRequired,
+  // intlized component prop
+  ...intlProp,
 };
 
-const mapStateToProps = (state, props) => ({
-  value: new Intl.NumberFormat(state.intl.locale, props.options).format(props.value),
-});
-
-function Number({ value }) {
-  return <span>{value}</span>;
+function Number({ intl, ...props }) {
+  return <span>{intl.number(props)}</span>;
 }
 
 Number.propTypes = propTypes;
 
-export default connect(mapStateToProps)(Number);
+export default injectIntl(Number);

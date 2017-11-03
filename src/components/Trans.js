@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import intlized from '../intlized';
+import injectIntl from './injectIntl';
+import intlProp from './intlProp';
 
 const propTypes = {
-  text: PropTypes.node.isRequired,
+  id: PropTypes.string.isRequired,
+  defaultMessage: PropTypes.string.isRequired,
+  // intlized component prop
+  ...intlProp,
 };
 
-function Trans({ text }) {
-  return <span>{text}</span>;
+function Trans({ intl, ...props }) {
+  return <span>{intl.trans(props)}</span>;
 }
 
 Trans.propTypes = propTypes;
 
-export default intlized(['text'])(Trans);
+export default injectIntl(Trans);
