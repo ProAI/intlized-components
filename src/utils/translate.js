@@ -29,24 +29,21 @@ export default function translate(args, state, customConfig) {
   }
 
   // get message
-  const rawMessage = getRawMessage(args.id, config.scope, state.intl.messages);
+  const message = getRawMessage(args.id, config.scope, state.intl.messages);
 
   // message not found, use default message or message key
-  if (!rawMessage) {
-    if (config.warnings) {
-      const scopeErrorMessage = config.scope ? ` scope "${config.scope}" and` : '';
-      if (args.defaultMessage) {
-        // eslint-disable-next-line no-console
-        console.warn(`Translation for${scopeErrorMessage} key "${args.id}" not found. Fallback to default message.`);
-      } else {
-        // eslint-disable-next-line no-console
-        console.warn(`Translation for${scopeErrorMessage} key "${args.id}" not found. No default message found.`);
-      }
+  if (config.warnings && !message) {
+    const scopeErrorMessage = config.scope ? ` scope "${config.scope}" and` : '';
+    if (args.defaultMessage) {
+      // eslint-disable-next-line no-console
+      console.warn(`Translation for${scopeErrorMessage} key "${args.id}" not found. Fallback to default message.`);
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn(`Translation for${scopeErrorMessage} key "${args.id}" not found. No default message found.`);
     }
-
-    return args.defaultMessage || args.id;
   }
 
-  // message found, set prop to message value
-  return new IntlMessageFormat(rawMessage, state.intl.locale).format(args.variables);
+  // format message with variables
+  const instance = new IntlMessageFormat(message || args.defaultMessage, state.intl.locale);
+  return instance.format(args.variables);
 }
