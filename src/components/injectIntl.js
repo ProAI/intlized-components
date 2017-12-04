@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import IntlRelativeFormat from 'intl-relativeformat';
 import translate from '../utils/translate';
+import polyfillDateFormat from '../utils/polyfillDateFormat';
 
 export default connect(state => ({
   intl: {
@@ -12,7 +13,7 @@ export default connect(state => ({
       if (!value) return null;
 
       const instance = new Intl.DateTimeFormat(state.intl.locale, options);
-      return instance.format(new Date(value));
+      return instance.format(new Date(polyfillDateFormat(value)));
     },
     number: ({ value, ...options }) => {
       if (!value) return null;
@@ -24,7 +25,7 @@ export default connect(state => ({
       if (!value) return null;
 
       const instance = new IntlRelativeFormat(state.intl.locale, options);
-      return instance.format(new Date(value));
+      return instance.format(new Date(polyfillDateFormat(value)));
     },
     locale: state.intl.locale,
   },
