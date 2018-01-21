@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import injectIntl from './injectIntl';
 import intlProp from './intlProp';
@@ -10,7 +9,7 @@ const propTypes = {
 };
 
 function DateTime({ intl, ...props }) {
-  return <span>{intl.dateTime(props)}</span>;
+  return intl.dateTime(props);
 }
 
 DateTime.propTypes = propTypes;

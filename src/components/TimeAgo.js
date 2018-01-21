@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import injectIntl from './injectIntl';
 import intlProp from './intlProp';
@@ -10,7 +9,7 @@ const propTypes = {
 };
 
 function TimeAgo({ intl, ...props }) {
-  return <span>{intl.timeAgo(props)}</span>;
+  return intl.timeAgo(props);
 }
 
 TimeAgo.propTypes = propTypes;

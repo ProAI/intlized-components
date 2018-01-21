@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import injectIntl from './injectIntl';
 import intlProp from './intlProp';
@@ -11,7 +10,7 @@ const propTypes = {
 };
 
 function Trans({ intl, ...props }) {
-  return <span>{intl.trans(props)}</span>;
+  return intl.trans(props);
 }
 
 Trans.propTypes = propTypes;

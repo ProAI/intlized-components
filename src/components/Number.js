@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import injectIntl from './injectIntl';
 import intlProp from './intlProp';
@@ -10,7 +9,7 @@ const propTypes = {
 };
 
 function Number({ intl, ...props }) {
-  return <span>{intl.number(props)}</span>;
+  return intl.number(props);
 }
 
 Number.propTypes = propTypes;
