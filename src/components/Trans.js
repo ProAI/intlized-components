@@ -7,7 +7,7 @@ const enhance = connect((state, ownProps) => ({ value: translate(state, ownProps
 const propTypes = {
   id: PropTypes.string.isRequired,
   defaultMessage: PropTypes.string,
-  variables: PropTypes.oneOf([PropTypes.objectOf(PropTypes.string), PropTypes.func]),
+  variables: PropTypes.oneOf([PropTypes.object, PropTypes.func]),
 };
 
 function Trans({ value }) {
