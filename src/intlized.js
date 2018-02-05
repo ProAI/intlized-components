@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import translate from './utils/translate';
 import injectIntl from './utils/injectIntl';
 import isString from './utils/isString';
+import connectOptions from './utils/connectOptions';
 
 export default function intlized(Component, intlizedPropKeys) {
-  return connect((state, ownProps) => {
+  const mapStateToProps = (state, ownProps) => {
     const stateProps = {};
 
     // translate intlized props
@@ -19,5 +20,7 @@ export default function intlized(Component, intlizedPropKeys) {
     });
 
     return stateProps;
-  }, {})(Component);
+  };
+
+  return connect(mapStateToProps, {}, null, connectOptions)(Component);
 }
