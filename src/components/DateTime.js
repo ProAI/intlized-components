@@ -1,17 +1,22 @@
 import PropTypes from 'prop-types';
-import injectIntl from './injectIntl';
-import intlProp from './intlProp';
+import { connect } from 'react-redux';
+import injectIntl from '../utils/injectIntl';
+
+const enhance = connect(
+  (state, { value, ...options }) => ({
+    value: injectIntl(state).dateTime(value, options),
+  }),
+  {},
+);
 
 const propTypes = {
   value: PropTypes.string.isRequired,
-  // intlized component prop
-  ...intlProp,
 };
 
-function DateTime({ intl, ...props }) {
-  return intl.dateTime(props);
+function DateTime({ value }) {
+  return value;
 }
 
 DateTime.propTypes = propTypes;
 
-export default injectIntl(DateTime);
+export default enhance(DateTime);

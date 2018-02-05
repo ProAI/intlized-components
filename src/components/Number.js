@@ -1,17 +1,22 @@
 import PropTypes from 'prop-types';
-import injectIntl from './injectIntl';
-import intlProp from './intlProp';
+import { connect } from 'react-redux';
+import injectIntl from '../utils/injectIntl';
+
+const enhance = connect(
+  (state, { value, ...options }) => ({
+    value: injectIntl(state).number(value, options),
+  }),
+  {},
+);
 
 const propTypes = {
   value: PropTypes.string.isRequired,
-  // intlized component prop
-  ...intlProp,
 };
 
-function Number({ intl, ...props }) {
-  return intl.number(props);
+function Number({ value }) {
+  return value;
 }
 
 Number.propTypes = propTypes;
 
-export default injectIntl(Number);
+export default enhance(Number);

@@ -1,18 +1,19 @@
 import PropTypes from 'prop-types';
-import injectIntl from './injectIntl';
-import intlProp from './intlProp';
+import { connect } from 'react-redux';
+import translate from '../utils/translate';
+
+const enhance = connect((state, ownProps) => ({ value: translate(state, ownProps) }), {});
 
 const propTypes = {
   id: PropTypes.string.isRequired,
-  defaultMessage: PropTypes.string.isRequired,
-  // intlized component prop
-  ...intlProp,
+  defaultMessage: PropTypes.string,
+  variables: PropTypes.oneOf([PropTypes.objectOf(PropTypes.string), PropTypes.func]),
 };
 
-function Trans({ intl, ...props }) {
-  return intl.trans(props);
+function Trans({ value }) {
+  return value;
 }
 
 Trans.propTypes = propTypes;
 
-export default injectIntl(Trans);
+export default enhance(Trans);

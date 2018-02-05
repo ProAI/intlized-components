@@ -1,32 +1,33 @@
-import { connect } from 'react-redux';
 import IntlRelativeFormat from 'intl-relativeformat';
-import translate from '../utils/translate';
-import polyfillDateFormat from '../utils/polyfillDateFormat';
+import polyfillDateFormat from './polyfillDateFormat';
+import translate from './translate';
 
-export default connect(state => ({
-  intl: {
-    trans: (args) => {
-      const translation = translate(args, state);
+export default function injectIntl(state) {
+  return {
+    trans: (value) => {
+      if (!value) return null;
+
+      const translation = translate(state, value);
       return translation;
     },
-    dateTime: ({ value, ...options }) => {
+    dateTime: (value, options) => {
       if (!value) return null;
 
       const instance = new Intl.DateTimeFormat(state.intl.locale, options);
       return instance.format(new Date(polyfillDateFormat(value)));
     },
-    number: ({ value, ...options }) => {
+    number: (value, options) => {
       if (!value) return null;
 
       const instance = new Intl.NumberFormat(state.intl.locale, options);
       return instance.format(value);
     },
-    timeAgo: ({ value, ...options }) => {
+    timeAgo: (value, options) => {
       if (!value) return null;
 
       const instance = new IntlRelativeFormat(state.intl.locale, options);
       return instance.format(new Date(polyfillDateFormat(value)));
     },
     locale: state.intl.locale,
-  },
-}));
+  };
+}
