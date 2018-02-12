@@ -3,6 +3,7 @@ import * as actions from './actions';
 import defineTranslations from './defineTranslations';
 import selectLocale from './selectLocale';
 import intlized from './intlized';
+import Intl from './components/Intl';
 import Trans from './components/Trans';
 import DateTime from './components/DateTime';
 import TimeAgo from './components/TimeAgo';
@@ -14,6 +15,7 @@ export {
   defineTranslations,
   selectLocale,
   intlized,
+  Intl,
   Trans,
   DateTime,
   TimeAgo,
