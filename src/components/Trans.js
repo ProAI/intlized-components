@@ -6,7 +6,7 @@ import connectOptions from '../utils/connectOptions';
 const propTypes = {
   id: PropTypes.string.isRequired,
   defaultMessage: PropTypes.string,
-  variables: PropTypes.oneOf([PropTypes.object, PropTypes.func]),
+  variables: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
 const mapStateToProps = (state, ownProps) => ({ value: translate(state, ownProps) });
