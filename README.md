@@ -7,7 +7,7 @@ This package provides an easy way for internationalization support in React.js a
 There are some i18n packages out there for react and in my opinion [`react-intl`](https://github.com/yahoo/react-intl) is the best one. The [`intl-messageformat`](https://github.com/yahoo/intl-messageformat) and [`intl-relativeformat`](https://github.com/yahoo/intl-relativeformat), which are part of `react-intl`, are great. That's why `intlized-components` use them, too. So you can define your messages the same way you would do it with `react-intl`. But then why write another i18n package? There are two things I thought we can do better:
 
 1.  Write less boilerplate code.
-2.  More specific way to define input placeholders, image titles etc.
+2.  Define translations for a specific prop (e.g. placeholder prop on input components)
 
 Have a look at the example below and decide yourself if this library did solve these problems. :)
 
