@@ -1,4 +1,4 @@
-export default function defineTranslations(scope, defaultMessages) {
+export default function createDict(scope, defaultMessages) {
   const messages = {};
 
   Object.keys(defaultMessages).forEach((key) => {
