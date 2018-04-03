@@ -51,10 +51,10 @@ The most convient way to use intlized components is to extend the dictionary for
 
 ```jsx
 import React from "react";
-import { extendDictionary, intlized, Trans } from "intlized-components";
+import { createDict, intlized, Trans } from "intlized-components";
 
-// Extend dictionary: Define a scope, then define the messages with the default translation
-const t = extendDictionary("RegistrationForm", {
+// Create local dictionary: Define a scope, then define the messages with the default translation
+const dict = createDict("RegistrationForm", {
   welcome: "Welcome {name}",
   inputPlaceholder: "Your name...",
   imageAlt: "This image was created on {date}"
@@ -69,14 +69,16 @@ export default function() {
   return (
     <div>
       {/* Basic translation with variable */}
-      <Trans {...t("welcome", { name: "dude" })} />
+      <Trans {...dict("welcome", { name: "dude" })} />
 
       {/* Intlized attribute placeholder */}
-      <IntlizedInput placeholder={t("inputPlaceholder")} />
+      <IntlizedInput placeholder={dict("inputPlaceholder")} />
 
       {/* Intlized attribute with date formatting util */}
       <IntlizedImage
-        alt={({ dateTime }) => t("imageAlt", { date: dateTime("2017-07-07") })}
+        alt={({ dateTime }) =>
+          dict("imageAlt", { date: dateTime("2017-07-07") })
+        }
       />
     </div>
   );
