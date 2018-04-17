@@ -47,7 +47,7 @@ combineReducers({
 
 ### Translation Example
 
-The most convient way to use intlized components is to extend the dictionary for every component, define intlized components and use the predefined `<Trans>` component. Basically with intlized components you can use any component as intlized component, just import the `intlized` function and wrap the component. But in most cases you need nothing more than the `<Trans>` component.
+The most convient way to use intlized components is to create a local dictionary for every component, define intlized components and use the predefined `<Trans>` component. Basically with intlized components you can use any component as intlized component, just import the `intlized` function and wrap the component. But in most cases you need nothing more than the `<Trans>` component.
 
 ```jsx
 import React from "react";
@@ -106,13 +106,10 @@ export default function({ name }) {
 
 ## Docs
 
-### `extendDictionary`
+### `createDict`
 
 ```javascript
-type ExtendDictionary = (
-  scope: string,
-  messages: { [string]: string }
-) => Messages;
+type CreateDict = (scope: string, messages: { [string]: string }) => Messages;
 
 type Messages = (key: string, variables?: Object) => Intlized$Message;
 ```
