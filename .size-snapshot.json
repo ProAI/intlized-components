@@ -1,0 +1,31 @@
+{
+  "dist/intlized-components.cjs.js": {
+    "bundled": 11978,
+    "minified": 6853,
+    "gzipped": 2144
+  },
+  "dist/intlized-components.esm.js": {
+    "bundled": 11509,
+    "minified": 6461,
+    "gzipped": 2061,
+    "treeshaked": {
+      "rollup": {
+        "code": 2472,
+        "import_statements": 147
+      },
+      "webpack": {
+        "code": 3694
+      }
+    }
+  },
+  "dist/intlized-components.umd.min.js": {
+    "bundled": 860356,
+    "minified": 687303,
+    "gzipped": 69127
+  },
+  "dist/intlized-components.umd.js": {
+    "bundled": 892756,
+    "minified": 697002,
+    "gzipped": 71987
+  }
+}

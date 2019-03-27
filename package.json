@@ -1,7 +1,6 @@
 {
   "name": "intlized-components",
   "version": "0.5.2",
-  "main": "./lib/index.js",
   "description": "React.js Redux components for internationalization (i18n)",
   "author": "Markus Wetzel <markuswetzel@gmx.net>",
   "license": "MIT",
@@ -16,43 +15,41 @@
   "bugs": {
     "url": "https://github.com/ProAI/intlized-components/issues"
   },
+  "main": "dist/intlized-components.cjs.js",
+  "module": "dist/intlized-components.esm.js",
   "scripts": {
-    "build": "./node_modules/.bin/babel -d lib/ src/",
-    "watch": "./node_modules/.bin/babel -d lib/ -w src/",
-    "clean": "rimraf lib",
-    "prepublishOnly": "yarn clean && yarn build",
-    "lint": "./node_modules/.bin/eslint src"
+    "build": "packsy build",
+    "dev": "packsy dev",
+    "prepublishOnly": "packsy validate && packsy build"
   },
   "files": [
-    "dist",
-    "es",
-    "lib"
+    "dist"
   ],
   "dependencies": {
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.0.0",
     "intl-messageformat": "^2.2.0",
     "intl-relativeformat": "^2.1.0",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "babel-cli": "6.26.0",
-    "eslint": "4.9.0",
-    "react": "16.3.0",
-    "react-dom": "16.3.0",
-    "react-kickstarter": "0.3.5",
-    "react-redux": "5.0.7",
-    "redux": "3.7.2",
-    "rimraf": "2.6.2"
+    "packsy": "0.1.5",
+    "react": "16.8.4",
+    "react-redux": "5.1.1",
+    "redux": "4.0.1"
   },
   "peerDependencies": {
     "react": ">=15",
-    "react-dom": ">=15",
     "react-redux": ">=5",
     "redux": ">=3"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "packsy pre-commit"
+    }
+  },
   "engines": {
-    "npm": ">=3",
-    "node": ">=5"
+    "node": ">= 8",
+    "npm": ">= 5"
   }
 }
