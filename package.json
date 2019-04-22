@@ -34,7 +34,7 @@
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "packsy": "0.1.5",
+    "packsy": "0.1.7",
     "react": "16.8.4",
     "react-redux": "5.1.1",
     "redux": "4.0.1"
