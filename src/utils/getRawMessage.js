@@ -1,4 +1,4 @@
-import isString from './isString';
+import isString from 'lodash.isstring';
 
 export default function getRawMessage(rawKey, messages) {
   const keys = rawKey.split('.');
@@ -6,7 +6,7 @@ export default function getRawMessage(rawKey, messages) {
   let message = messages;
   let error = false;
 
-  keys.forEach((key) => {
+  keys.forEach(key => {
     if (!message[key]) {
       error = true;
       return;

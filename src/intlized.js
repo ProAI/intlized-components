@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import isString from 'lodash.isstring';
 import translate from './utils/translate';
 import injectIntl from './utils/injectIntl';
-import isString from './utils/isString';
 import connectOptions from './utils/connectOptions';
 
 export default function intlized(RawComponent, intlizedPropKeys) {
@@ -15,7 +15,7 @@ export default function intlized(RawComponent, intlizedPropKeys) {
     const stateProps = {};
 
     // translate intlized props
-    intlizedPropKeys.forEach((key) => {
+    intlizedPropKeys.forEach(key => {
       if (ownProps[key]) {
         if (typeof ownProps[key] === 'function') {
           stateProps[key] = ownProps[key](injectIntl(state));
@@ -28,5 +28,10 @@ export default function intlized(RawComponent, intlizedPropKeys) {
     return stateProps;
   };
 
-  return connect(mapStateToProps, {}, null, connectOptions)(Component);
+  return connect(
+    mapStateToProps,
+    {},
+    null,
+    connectOptions,
+  )(Component);
 }

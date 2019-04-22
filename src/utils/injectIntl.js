@@ -1,11 +1,11 @@
 import IntlRelativeFormat from 'intl-relativeformat';
+import isString from 'lodash.isstring';
 import polyfillDateFormat from './polyfillDateFormat';
 import translate from './translate';
-import isString from '../utils/isString';
 
 export default function injectIntl(state) {
   return {
-    trans: (value) => {
+    trans: value => {
       if (!value) return null;
       if (isString(value)) return value;
 

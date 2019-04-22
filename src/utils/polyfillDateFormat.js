@@ -1,4 +1,4 @@
-import isString from './isString';
+import isString from 'lodash.isstring';
 
 export default function polyfillDateFormat(variable) {
   if (isString(variable)) {
