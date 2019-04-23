@@ -1,4 +1,4 @@
-import IntlMessageFormat from 'intl-messageformat';
+import MessageFormat from 'messageformat';
 import getMessage from './getMessage';
 
 export default function translate(state, translation) {
@@ -35,9 +35,8 @@ export default function translate(state, translation) {
   }
 
   // format message with variables
-  const instance = new IntlMessageFormat(
-    message || translation.defaultMessage,
-    state.intl.locale,
+  const instance = new MessageFormat(state.intl.locale);
+  return instance.compile(message || translation.defaultMessage)(
+    translation.variables,
   );
-  return instance.format(translation.variables);
 }
