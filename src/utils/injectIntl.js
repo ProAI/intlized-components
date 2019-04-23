@@ -1,4 +1,3 @@
-import IntlRelativeFormat from 'intl-relativeformat';
 import isString from 'lodash.isstring';
 import polyfillDateFormat from './polyfillDateFormat';
 import translate from './translate';
@@ -27,7 +26,7 @@ export default function injectIntl(state) {
     timeAgo: (value, options) => {
       if (!value) return null;
 
-      const instance = new IntlRelativeFormat(state.intl.locale, options);
+      const instance = new Intl.RelativeTimeFormat(state.intl.locale, options);
       return instance.format(new Date(polyfillDateFormat(value)));
     },
     locale: state.intl.locale,
