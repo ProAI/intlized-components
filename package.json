@@ -1,6 +1,6 @@
 {
   "name": "intlized-components",
-  "version": "0.5.3",
+  "version": "0.5.5",
   "description": "React.js Redux components for internationalization (i18n)",
   "author": "Markus Wetzel <markuswetzel@gmx.net>",
   "license": "MIT",
@@ -26,8 +26,8 @@
     "dist"
   ],
   "dependencies": {
-    "messageformat": "^2.1.0",
     "lodash.isstring": "^4.0.1",
+    "messageformat": "^2.1.0",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {

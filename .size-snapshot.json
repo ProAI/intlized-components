@@ -1,31 +1,31 @@
 {
   "dist/intlized-components.cjs.js": {
-    "bundled": 12002,
-    "minified": 6882,
-    "gzipped": 2147
+    "bundled": 13078,
+    "minified": 7173,
+    "gzipped": 2282
   },
   "dist/intlized-components.esm.js": {
-    "bundled": 11513,
-    "minified": 6475,
-    "gzipped": 2063,
+    "bundled": 12609,
+    "minified": 6781,
+    "gzipped": 2202,
     "treeshaked": {
       "rollup": {
-        "code": 2479,
-        "import_statements": 178
+        "code": 2827,
+        "import_statements": 138
       },
       "webpack": {
-        "code": 3744
+        "code": 4053
       }
     }
   },
   "dist/intlized-components.umd.min.js": {
-    "bundled": 862835,
-    "minified": 687465,
-    "gzipped": 69185
+    "bundled": 168134,
+    "minified": 57465,
+    "gzipped": 14196
   },
   "dist/intlized-components.umd.js": {
-    "bundled": 895235,
-    "minified": 697175,
-    "gzipped": 72052
+    "bundled": 200534,
+    "minified": 67179,
+    "gzipped": 16876
   }
 }
