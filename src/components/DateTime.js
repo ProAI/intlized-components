@@ -1,22 +1,22 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import injectIntl from '../utils/injectIntl';
-import connectOptions from '../utils/connectOptions';
+import useIntl from '../hooks/useIntl';
 
 const propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.instanceOf(Date),
+  ]),
 };
 
-const mapStateToProps = (state, { value, ...ownProps }) => ({
-  value: injectIntl(state).dateTime(value, ownProps),
-});
-
-const enhance = connect(mapStateToProps, {}, null, connectOptions);
-
 function DateTime({ value }) {
-  return value;
+  const intl = useIntl();
+
+  return useMemo(() => {
+    return intl.dateTime(value);
+  }, [intl.locale]);
 }
 
 DateTime.propTypes = propTypes;
 
-export default enhance(DateTime);
+export default DateTime;

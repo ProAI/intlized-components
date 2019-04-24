@@ -1,26 +1,16 @@
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import injectIntl from '../utils/injectIntl';
-import connectOptions from '../utils/connectOptions';
+import useIntl from '../hooks/useIntl';
 
 const propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.func,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const translate = ownProps.render || ownProps.children;
+function Intl({ children: render }) {
+  const intl = useIntl();
 
-  return {
-    children: translate(injectIntl(state)),
-  };
-};
-
-const enhance = connect(mapStateToProps, {}, null, connectOptions);
-
-function Intl({ children }) {
-  return children;
+  return render(intl);
 }
 
 Intl.propTypes = propTypes;
 
-export default enhance(Intl);
+export default Intl;

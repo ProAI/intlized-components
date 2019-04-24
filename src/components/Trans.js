@@ -1,7 +1,6 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import translate from '../utils/translate';
-import connectOptions from '../utils/connectOptions';
+import useIntl from '../hooks/useIntl';
 
 const propTypes = {
   id: PropTypes.string.isRequired,
@@ -9,14 +8,14 @@ const propTypes = {
   variables: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
-const mapStateToProps = (state, ownProps) => ({ value: translate(state, ownProps) });
+function Trans({ id, defaultMessage, variables }) {
+  const intl = useIntl();
 
-const enhance = connect(mapStateToProps, {}, null, connectOptions);
-
-function Trans({ value }) {
-  return value;
+  return useMemo(() => {
+    return intl.trans({ id, defaultMessage, variables });
+  }, [intl.locale]);
 }
 
 Trans.propTypes = propTypes;
 
-export default enhance(Trans);
+export default Trans;

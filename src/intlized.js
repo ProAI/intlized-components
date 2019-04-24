@@ -1,9 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import isString from 'lodash.isstring';
-import translate from './utils/translate';
-import injectIntl from './utils/injectIntl';
-import connectOptions from './utils/connectOptions';
+import getDisplayName from './utils/getDisplayName';
+import useIntl from './hooks/useIntl';
 
 export default function intlized(RawComponent, intlizedPropKeys) {
   // create component from strings like div or input
@@ -11,27 +9,25 @@ export default function intlized(RawComponent, intlizedPropKeys) {
     ? props => React.createElement(RawComponent, props)
     : RawComponent;
 
-  const mapStateToProps = (state, ownProps) => {
-    const stateProps = {};
+  const IntlizedComponent = props => {
+    const intl = useIntl();
+    const intlizedProps = {};
 
     // translate intlized props
     intlizedPropKeys.forEach(key => {
-      if (ownProps[key]) {
-        if (typeof ownProps[key] === 'function') {
-          stateProps[key] = ownProps[key](injectIntl(state));
-        } else if (!isString(ownProps[key])) {
-          stateProps[key] = translate(state, ownProps[key]);
+      if (props[key]) {
+        if (typeof props[key] === 'function') {
+          intlizedProps[key] = props[key](intl);
+        } else if (!isString(props[key])) {
+          intlizedProps[key] = intl.trans(props[key]);
         }
       }
     });
 
-    return stateProps;
+    return <Component {...props} {...intlizedProps} />;
   };
 
-  return connect(
-    mapStateToProps,
-    {},
-    null,
-    connectOptions,
-  )(Component);
+  IntlizedComponent.displayName = `Intlized(${getDisplayName(Component)})`;
+
+  return IntlizedComponent;
 }

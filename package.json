@@ -1,15 +1,15 @@
 {
   "name": "intlized-components",
   "version": "0.5.5",
-  "description": "React.js Redux components for internationalization (i18n)",
+  "description": "React.js components for internationalization (i18n)",
   "author": "Markus Wetzel <markuswetzel@gmx.net>",
   "license": "MIT",
   "keywords": [
     "react",
-    "redux",
     "i18n",
     "intl",
-    "internationalization"
+    "internationalization",
+    "hooks"
   ],
   "repository": "https://github.com/ProAI/intlized-components.git",
   "bugs": {
@@ -31,15 +31,11 @@
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "packsy": "0.1.7",
-    "react": "16.8.4",
-    "react-redux": "5.1.1",
-    "redux": "4.0.1"
+    "packsy": "0.1.8",
+    "react": "16.8.6"
   },
   "peerDependencies": {
-    "react": ">=15",
-    "react-redux": ">=5",
-    "redux": ">=3"
+    "react": ">=16.8"
   },
   "husky": {
     "hooks": {

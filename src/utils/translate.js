@@ -1,7 +1,7 @@
 import MessageFormat from 'messageformat';
 import getMessage from './getMessage';
 
-export default function translate(state, translation) {
+export default function translate(messages, locale, translation) {
   // check if id and default message are defined
   if (!translation.id) {
     // eslint-disable-next-line no-console
@@ -13,29 +13,22 @@ export default function translate(state, translation) {
   }
 
   // get message
-  const message = getMessage(state.intl.messages, translation.id);
+  const message = getMessage(messages, translation.id);
 
   // message not found, use default message or message key
-  if (!message) {
-    if (translation.defaultMessage) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        `Translation for key "${
-          translation.id
-        }" not found. Fallback to default message.`,
-      );
-    } else {
-      // eslint-disable-next-line no-console
-      console.warn(
-        `Translation for key "${
-          translation.id
-        }" not found. No default message found.`,
-      );
-    }
+  if (!message && !translation.defaultMessage) {
+    // eslint-disable-next-line no-console
+    console.error(
+      `Translation for key "${
+        translation.id
+      }" not found. No default message found.`,
+    );
+
+    return null;
   }
 
   // format message with variables
-  const instance = new MessageFormat(state.intl.locale);
+  const instance = new MessageFormat(locale);
   return instance.compile(message || translation.defaultMessage)(
     translation.variables,
   );

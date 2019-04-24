@@ -1,22 +1,19 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import injectIntl from '../utils/injectIntl';
-import connectOptions from '../utils/connectOptions';
+import useIntl from '../hooks/useIntl';
 
 const propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state, { value, ...ownProps }) => ({
-  value: injectIntl(state).number(value, ownProps),
-});
-
-const enhance = connect(mapStateToProps, {}, null, connectOptions);
-
 function Number({ value }) {
-  return value;
+  const intl = useIntl();
+
+  return useMemo(() => {
+    return intl.number(value);
+  }, [intl.locale]);
 }
 
 Number.propTypes = propTypes;
 
-export default enhance(Number);
+export default Number;
