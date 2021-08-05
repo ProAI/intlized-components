@@ -10,7 +10,7 @@ export default function reducer(state, action) {
     case 'ADD_MESSAGES': {
       return {
         ...state,
-        messages: Object.assign({}, action.messages, state.messages),
+        messages: { ...action.messages, ...state.messages },
       };
     }
     default: {

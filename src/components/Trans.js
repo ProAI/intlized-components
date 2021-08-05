@@ -11,9 +11,9 @@ const propTypes = {
 function Trans({ id, defaultMessage, variables }) {
   const intl = useIntl();
 
-  return useMemo(() => {
-    return intl.trans({ id, defaultMessage, variables });
-  }, [intl.locale]);
+  return useMemo(() => intl.trans({ id, defaultMessage, variables }), [
+    intl.locale,
+  ]);
 }
 
 Trans.propTypes = propTypes;
