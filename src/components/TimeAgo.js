@@ -7,14 +7,14 @@ const propTypes = {
     PropTypes.string.isRequired,
     PropTypes.instanceOf(Date),
   ]),
+  // eslint-disable-next-line react/forbid-prop-types
+  options: PropTypes.object,
 };
 
-function TimeAgo({ value }) {
+function TimeAgo({ value, options }) {
   const intl = useIntl();
 
-  return useMemo(() => {
-    return intl.timeAgo(value);
-  }, [intl.locale]);
+  return useMemo(() => intl.timeAgo(value, options), [intl.locale]);
 }
 
 TimeAgo.propTypes = propTypes;
