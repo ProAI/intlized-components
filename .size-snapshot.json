@@ -27,5 +27,34 @@
     "bundled": 199019,
     "minified": 66620,
     "gzipped": 16752
+  },
+  "intlized-components.cjs.js": {
+    "bundled": 14271,
+    "minified": 7997,
+    "gzipped": 2568
+  },
+  "intlized-components.esm.js": {
+    "bundled": 12995,
+    "minified": 6954,
+    "gzipped": 2427,
+    "treeshaked": {
+      "rollup": {
+        "code": 373,
+        "import_statements": 86
+      },
+      "webpack": {
+        "code": 4004
+      }
+    }
+  },
+  "intlized-components.umd.min.js": {
+    "bundled": 166275,
+    "minified": 57015,
+    "gzipped": 14428
+  },
+  "intlized-components.umd.js": {
+    "bundled": 195680,
+    "minified": 64300,
+    "gzipped": 16645
   }
 }
