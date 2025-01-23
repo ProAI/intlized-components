@@ -7,7 +7,7 @@ import Context from '../Context';
 export default function useIntl() {
   const { messages, locale, changeLocale, addMessages } = useContext(Context);
 
-  const trans = value => {
+  const trans = (value) => {
     if (!value) return null;
     if (isString(value)) return value;
 
