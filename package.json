@@ -27,12 +27,11 @@
   ],
   "dependencies": {
     "lodash.isstring": "^4.0.1",
-    "messageformat": "^2.1.0",
-    "prop-types": "^15.7.2"
+    "messageformat": "^2.1.0"
   },
   "devDependencies": {
-    "packsy": "0.2.2",
-    "react": "16.8.6"
+    "packsy": "0.2.4",
+    "react": "18.3.1"
   },
   "peerDependencies": {
     "react": ">=16.8"

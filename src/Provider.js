@@ -1,29 +1,13 @@
-import React, { useReducer } from 'react';
-import PropTypes from 'prop-types';
+import React, { useReducer, useMemo } from 'react';
 import Context from './Context';
 import reducer from './reducer';
 
-const propTypes = {
-  locale: PropTypes.string,
-  defaultLocale: PropTypes.string,
-  supportedLocales: PropTypes.arrayOf(PropTypes.string),
-  // eslint-disable-next-line react/forbid-prop-types
-  messages: PropTypes.object,
-  children: PropTypes.node.isRequired,
-};
-
-const defaultProps = {
-  locale: 'en',
-  defaultLocale: 'en',
-  supportedLocales: ['en'],
-  messages: {},
-};
-
+/* eslint-disable react/prop-types */
 function Provider({
-  locale: initialLocale,
-  defaultLocale,
-  supportedLocales,
-  messages: initialMessages,
+  locale: initialLocale = 'en',
+  defaultLocale = 'en',
+  supportedLocales = ['en'],
+  messages: initialMessages = {},
   children,
 }) {
   const [state, dispatch] = useReducer(reducer, {
@@ -39,27 +23,24 @@ function Provider({
     });
   };
 
-  const addMessages = nextMessages => {
+  const addMessages = (nextMessages) => {
     dispatch({ type: 'ADD_MESSAGES', messages: nextMessages });
   };
 
-  return (
-    <Context.Provider
-      value={{
-        locale: state.locale,
-        defaultLocale,
-        supportedLocales,
-        messages: state.messages,
-        changeLocale,
-        addMessages,
-      }}
-    >
-      {children}
-    </Context.Provider>
+  const context = useMemo(
+    {
+      locale: state.locale,
+      defaultLocale,
+      supportedLocales,
+      messages: state.messages,
+      changeLocale,
+      addMessages,
+    },
+    [state.locale, state.messages],
   );
-}
 
-Provider.propTypes = propTypes;
-Provider.defaultProps = defaultProps;
+  return <Context.Provider value={context}>{children}</Context.Provider>;
+}
+/* eslint-enable */
 
 export default Provider;
