@@ -28,14 +28,14 @@ function Provider({
   };
 
   const context = useMemo(
-    {
+    () => ({
       locale: state.locale,
       defaultLocale,
       supportedLocales,
       messages: state.messages,
       changeLocale,
       addMessages,
-    },
+    }),
     [state.locale, state.messages],
   );
 
