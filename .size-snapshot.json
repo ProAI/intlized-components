@@ -29,32 +29,32 @@
     "gzipped": 16752
   },
   "intlized-components.cjs.js": {
-    "bundled": 14271,
-    "minified": 7997,
-    "gzipped": 2568
+    "bundled": 10950,
+    "minified": 6094,
+    "gzipped": 2114
   },
   "intlized-components.esm.js": {
-    "bundled": 12995,
-    "minified": 6954,
-    "gzipped": 2427,
+    "bundled": 10168,
+    "minified": 5456,
+    "gzipped": 1999,
     "treeshaked": {
       "rollup": {
-        "code": 373,
-        "import_statements": 86
+        "code": 60,
+        "import_statements": 60
       },
       "webpack": {
-        "code": 4004
+        "code": 1110
       }
     }
   },
   "intlized-components.umd.min.js": {
-    "bundled": 166275,
-    "minified": 57015,
-    "gzipped": 14428
+    "bundled": 153754,
+    "minified": 51331,
+    "gzipped": 12583
   },
   "intlized-components.umd.js": {
-    "bundled": 195680,
-    "minified": 64300,
-    "gzipped": 16645
+    "bundled": 153754,
+    "minified": 51331,
+    "gzipped": 12583
   }
 }
