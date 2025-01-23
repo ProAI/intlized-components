@@ -1,4 +1,9 @@
-export default function createDict(scope, defaultMessages) {
+import createDictHash from './createDictHash';
+
+export default function createDict(...args) {
+  const scope = args.length > 1 ? args[0] : createDictHash(args[0]);
+  const defaultMessages = args.length > 1 ? args[1] : args[0];
+
   const messages = {};
 
   Object.keys(defaultMessages).forEach((key) => {

@@ -1,5 +1,6 @@
 import Provider from './Provider';
 import createDict from './createDict';
+import createDictHash from './createDictHash';
 import intlized from './intlized';
 import useIntl from './hooks/useIntl';
 import Intl from './components/Intl';
@@ -11,6 +12,7 @@ import Number from './components/Number';
 export {
   Provider,
   createDict,
+  createDictHash,
   intlized,
   useIntl,
   Intl,
