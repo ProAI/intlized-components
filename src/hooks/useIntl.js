@@ -46,25 +46,25 @@ export default function useIntl() {
     const instance = new Intl.RelativeTimeFormat(locale, options);
 
     if (diff < secondsPerMinute) {
-      return instance.format(-Math.round(diff), 'second');
+      return instance.format(-Math.trunc(diff), 'second');
     }
     if (diff < secondsPerHour) {
-      return instance.format(-Math.round(diff / secondsPerMinute), 'minute');
+      return instance.format(-Math.trunc(diff / secondsPerMinute), 'minute');
     }
     if (diff < secondsPerDay) {
-      return instance.format(-Math.round(diff / secondsPerHour), 'hour');
+      return instance.format(-Math.trunc(diff / secondsPerHour), 'hour');
     }
     if (diff < secondsPerWeek) {
-      return instance.format(-Math.round(diff / secondsPerDay), 'day');
+      return instance.format(-Math.trunc(diff / secondsPerDay), 'day');
     }
     if (diff < secondsPerMonth) {
-      return instance.format(-Math.round(diff / secondsPerWeek), 'week');
+      return instance.format(-Math.trunc(diff / secondsPerWeek), 'week');
     }
     if (diff < secondsPerYear) {
-      return instance.format(-Math.round(diff / secondsPerMonth), 'month');
+      return instance.format(-Math.trunc(diff / secondsPerMonth), 'month');
     }
 
-    return instance.format(-Math.round(diff / secondsPerYear), 'year');
+    return instance.format(-Math.trunc(diff / secondsPerYear), 'year');
   };
 
   return {
